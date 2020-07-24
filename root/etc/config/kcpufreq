@@ -1,0 +1,10 @@
+
+config settings 'kcpufreq'
+	option enable '0'
+	option advance '0'
+	option maxfreq '1512000'
+	option minifreq '408000'
+	option governor 'schedutil'
+    option old_governor 'ondemand'
+    option old_minifreq '408000'
+    option old_maxfreq '1512000'

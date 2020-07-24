@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+
+msgid "CPU Freq"
+msgstr "CPU 性能调节"
+
+msgid "CPU Freq Settings"
+msgstr "CPU 性能优化及调节设置"
+
+msgid "Set CPU Scaling Governor to Max Performance or Balance Mode <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">Github</a>"
+msgstr "调整 CPU 性能调节器，来获得最高性能或最佳的节能方案。| <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">项目主页</a>"
+
+msgid "Plan"
+msgstr "预设方案"
+
+msgid "Current governor: "
+msgstr "当前在使用的调节器："
+
+msgid ""
+"Performance: the cpu run at the maxfreq. the best performance.<br/>"
+"Ondemand: fast up,fast down. the traditional governor of linux. the better performance. default.<br/>"
+"Conservative: slow up,fast down.same as Ondemand,but energy conservation.Ordinary performance.<br/>"
+"UserSpace: all in user. Not recommended. <br/>"
+"Schedutil: the new governor of linux. Base on EAS. Recommended.<br/>"
+"Powersave: the cpu run at the minfreq, the best energy saving.<br/><br/>"
+msgstr ""
+"Performance：最高性能模式，CPU会一直运转在最高频率，但很耗电！<br/>"
+"Ondemand：Linux的传统的动态调节（按需），流畅性较好，但因为时快降快升所以有点耗电！一般默认是它。<br/>"
+"Conservative: 类似于Ondemand，但为了节能所以是快降慢升方式，性能一般，适合单一功能的路由器。<br/>"
+"UserSpace: 不推荐。<br/>"
+"Schedutil: 最新的Linux调节器，现在的手机都用它。基于EAS方式，性能节能最优选。平衡性较好，个人推荐！<br/>"
+"Powersave：最低性能运转，最高节能！用了它，我都不知道我要这路由还有何用...<br/><br/>"
+
+msgid "Advance"
+msgstr "高级选项"
+
+msgid "Apply the following settings.<br/>Uncheck it, unless you know what to do.The same below."
+msgstr "应用以下设置项<br/>仅当你知道这些选项意义时选择。下同。"
+
+msgid "Min Idle CPU Freq"
+msgstr "待机 CPU 最小频率"
+
+msgid "Max Turbo Boost CPU Freq"
+msgstr "最大 Turbo Boost CPU 频率"
+
+msgid "Ignore it, unless ni know what is it."
+msgstr "忽略它，除非你知道你在做什么"

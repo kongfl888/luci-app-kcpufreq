@@ -1,0 +1,11 @@
+{
+	"luci-app-kcpufreq": {
+		"description": "Grant UCI access for luci-app-kcpufreq",
+		"read": {
+			"uci": [ "kcpufreq" ]
+		},
+		"write": {
+			"uci": [ "kcpufreq" ]
+		}
+	}
+}

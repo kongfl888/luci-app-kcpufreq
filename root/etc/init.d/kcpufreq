@@ -1,0 +1,39 @@
+#!/bin/sh /etc/rc.common
+#
+# [K] (c)2020
+# http://github.com/kongfl888
+#
+START=50
+
+NAME=kcpufreq
+
+uci_get_by_type() {
+    local ret=$(uci get $NAME.@$1[0].$2 2>/dev/null)
+    echo ${ret:=$3}
+}
+
+start()
+{
+    config_load kcpufreq
+    if [ "$enable" != "0" ]; then
+        local cpumin=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq`
+        local cpumax=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq`
+        [ -z "$cpumin" ] && cpumin="408000"
+        [ -z "$cpumax" ] && cpumax="1512000"
+        local enable=$(uci_get_by_type settings enable 0)
+        local advance=$(uci_get_by_type settings advance 0)
+        local governor=$(uci_get_by_type settings governor schedutil)
+        local minifreq=$(uci_get_by_type settings minifreq $cpumin)
+        local maxfreq=$(uci_get_by_type settings maxfreq $cpumax)
+        echo $governor > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+        if [ "$advance" != "0" ]; then
+            echo $minifreq > /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
+            echo $maxfreq > /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+        fi
+    fi
+}
+
+stop()
+{
+
+}
