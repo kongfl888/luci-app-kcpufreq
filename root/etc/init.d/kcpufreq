@@ -3,7 +3,7 @@
 # [K] (c)2020
 # http://github.com/kongfl888
 #
-START=50
+START=99
 
 NAME=kcpufreq
 
@@ -25,6 +25,7 @@ start()
         local governor=$(uci_get_by_type settings governor schedutil)
         local minifreq=$(uci_get_by_type settings minifreq $cpumin)
         local maxfreq=$(uci_get_by_type settings maxfreq $cpumax)
+        logger "cpufreq: set to $governor"
         echo $governor > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
         if [ "$advance" != "0" ]; then
             echo $minifreq > /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
