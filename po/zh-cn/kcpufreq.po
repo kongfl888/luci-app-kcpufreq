@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 
 msgid "CPU Freq"
-msgstr "CPU 性能调节"
+msgstr "CPU 性能优化"
 
 msgid "CPU Freq Settings"
-msgstr "CPU 性能优化及调节设置"
+msgstr "CPU 性能优化及调节"
 
 msgid "Set CPU Scaling Governor to Max Performance or Balance Mode <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">Github</a>"
 msgstr "调整 CPU 性能调节器，来获得最高性能或最佳的节能方案。| <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">项目主页</a>"
@@ -38,10 +38,10 @@ msgid "Apply the following settings.<br/>Uncheck it, unless you know what to do.
 msgstr "应用以下设置项<br/>仅当你知道这些选项意义时选择。下同。"
 
 msgid "Min Idle CPU Freq"
-msgstr "待机 CPU 最小频率"
+msgstr "待机时 CPU 最小频率"
 
 msgid "Max Turbo Boost CPU Freq"
-msgstr "最大 Turbo Boost CPU 频率"
+msgstr "最大的 CPU 睿频加速频率"
 
 msgid "Ignore it, unless ni know what is it."
 msgstr "忽略它，除非你知道你在做什么"
