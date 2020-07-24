@@ -33,7 +33,7 @@ governor_array = string.split(cpu_governors, " ")
 cur_gov = fs.readfile("/sys/devices/system/cpu/cpufreq/policy0/scaling_governor")
 
 mp = Map("kcpufreq", translate("CPU Freq Settings"))
-mp.description = translate("Set CPU Scaling Governor to Max Performance or Balance Mode <a href=\"https://github.com/kongfl888/luci-app-autorewan\">Github</a>")
+mp.description = translate("Set CPU Scaling Governor to Max Performance or Balance Mode <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">Github</a>")
 
 s = mp:section(NamedSection, "kcpufreq", "settings")
 s.anonymouse = true
