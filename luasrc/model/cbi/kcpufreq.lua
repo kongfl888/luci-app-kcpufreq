@@ -46,7 +46,7 @@ governor = s:option(ListValue, "governor", translate("Plan"))
 for _, e in ipairs(governor_array) do
 	if e ~= "" then governor:value(translate(e,string.upper(e))) end
 end
-governor.description = "<b>"..translate("Current governor: ")..string.format(" [ %s ]", cur_gov).."</b>"..translate("<br/><br/>"
+governor.description = "<b>"..translate("Current governor:")..string.format(" [ %s ]", cur_gov).."</b>"..translate("<br/><br/>"
 .."Performance: the cpu run at the maxfreq. the best performance.<br/>"
 .."Ondemand: fast up,fast down. the traditional governor of linux. the better performance. default.<br/>"
 .."Conservative: slow up,fast down.same as Ondemand,but energy conservation.Ordinary performance.<br/>"
@@ -58,19 +58,19 @@ governor.description = "<b>"..translate("Current governor: ")..string.format(" [
 advance=s:option(Flag,"advance",translate("Advance"))
 advance.rmempty = false
 advance.default=0
-advance.description="Apply the following settings.<br/>Uncheck it, unless you know what to do.The same below."
+advance.description=translate("Apply the following settings.<br/>Uncheck it, unless you know what to do.The same below.")
 
 minfreq = s:option(ListValue, "minifreq", translate("Min Idle CPU Freq"))
 for _, e in ipairs(freq_array) do
 	if e ~= "" then minfreq:value(e) end
 end
-minfreq.description="Ignore it, unless ni know what is it."
+minfreq.description=translate("Ignore it, unless ni know what is it.")
 
 maxfreq = s:option(ListValue, "maxfreq", translate("Max Turbo Boost CPU Freq"))
 for _, e in ipairs(freq_array) do
 	if e ~= "" then maxfreq:value(e) end
 end
-maxfreq.description="Ignore it, unless ni know what is it."
+maxfreq.description=translate("Ignore it, unless ni know what is it.")
 
 local apply =luci.http.formvalue("cbi.apply")
 if apply then
