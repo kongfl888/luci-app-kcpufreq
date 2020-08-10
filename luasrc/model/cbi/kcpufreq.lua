@@ -52,7 +52,8 @@ governor.description = "<b>"..translate("Current governor:")..string.format(" [ 
 .."Conservative: slow up,fast down.same as Ondemand,but energy conservation.Ordinary performance.<br/>"
 .."UserSpace: all in user. Not recommended. <br/>"
 .."Schedutil: the new governor of linux. Base on EAS. Recommended.<br/>"
-.."Powersave: the cpu run at the minfreq, the best energy saving.<br/><br/>"
+.."Powersave: the cpu run at the minfreq, the best energy saving.<br/>"
+.."Please wait for 10s after change!<br/><br/>"
 )
 
 advance=s:option(Flag,"advance",translate("Advance"))
@@ -76,6 +77,7 @@ local apply =luci.http.formvalue("cbi.apply")
 if apply then
     sys.call("/etc/init.d/kcpufreq enable &")
     sys.call("sleep 10 && /etc/init.d/kcpufreq restart &")
+    sys.call("sleep 7")
 end
 
 return mp
