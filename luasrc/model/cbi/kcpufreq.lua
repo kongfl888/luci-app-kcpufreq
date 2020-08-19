@@ -110,7 +110,7 @@ maxfreq.description=translate("Ignore it, unless ni know what is it.")
 
 local apply =luci.http.formvalue("cbi.apply")
 if apply then
-    if not fs.access("/etc/init.d/kcpufreq") then
+    if fs.access("/etc/init.d/kcpufreq") then
         sys.call("/bin/chmod +x /etc/init.d/kcpufreq")
         sys.call("/etc/init.d/kcpufreq enable &")
         sys.call("sleep 10 && /etc/init.d/kcpufreq restart &")
