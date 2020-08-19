@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-kcpufreq
-PKG_VERSION:=1.1
+PKG_VERSION:=1.2
 PKG_RELEASE:=1
-PKG_DATE:=20200810
+PKG_DATE:=20200819
 
 PKG_MAINTAINER:=kongfl888 <kongfl888@outlook.com>
 PKG_LICENSE:=GPL-3.0
