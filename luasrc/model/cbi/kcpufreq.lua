@@ -4,7 +4,14 @@
 local sys = require "luci.sys"
 local fs = require "nixio.fs"
 
+local function isempty(s)
+  return s == nil or s == ''
+end
+
 function string.trim(str)
+    if isempty(str) then
+        return ''
+    end
     return (string.gsub(str, "^[%s\n\r\t]*(.-)[%s\n\r\t]*$", "%1"))
 end
 
@@ -21,16 +28,44 @@ function string.split(input, delimiter)
     return arr
 end
 
-cpu_freqs = fs.readfile("/sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies") or "1296000"
-cpu_freqs = string.trim(cpu_freqs)
+local function read_file(f)
+    if not fs.access(f) then
+        return ''
+    end
+    return fs.readfile(f)
+end
 
-cpu_governors = fs.readfile("/sys/devices/system/cpu/cpufreq/policy0/scaling_available_governors") or "conservative"
+cpu_freqs = read_file("/sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies")
+cpu_freqs = string.trim(cpu_freqs)
+if isempty(cpu_freqs) then
+    cpu_freqs = read_file("/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies")
+    cpu_freqs = string.trim(cpu_freqs)
+    if isempty(cpu_freqs) then
+        cpu_freqs = "1296000"
+    end
+end
+
+cpu_governors = read_file("/sys/devices/system/cpu/cpufreq/policy0/scaling_available_governors")
 cpu_governors = string.trim(cpu_governors)
+if isempty(cpu_governors) then
+    cpu_governors = read_file("/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors")
+    cpu_governors = string.trim(cpu_governors)
+    if isempty(cpu_governors) then
+         cpu_governors = "conservative"
+    end
+end
 
 freq_array = string.split(cpu_freqs, " ")
 governor_array = string.split(cpu_governors, " ")
 
-cur_gov = fs.readfile("/sys/devices/system/cpu/cpufreq/policy0/scaling_governor")
+cur_gov = read_file("/sys/devices/system/cpu/cpufreq/policy0/scaling_governor")
+cur_gov = string.trim(cur_gov)
+if isempty(cur_gov) then
+    cur_gov = read_file("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor")
+    if isempty(cur_gov) then
+         cur_gov = "read failed"
+    end
+end
 
 mp = Map("kcpufreq", translate("CPU Freq Settings"))
 mp.description = translate("Set CPU Scaling Governor to Max Performance or Balance Mode <a href=\"https://github.com/kongfl888/luci-app-kcpufreq\">Github</a>")
@@ -75,9 +110,12 @@ maxfreq.description=translate("Ignore it, unless ni know what is it.")
 
 local apply =luci.http.formvalue("cbi.apply")
 if apply then
-    sys.call("/etc/init.d/kcpufreq enable &")
-    sys.call("sleep 10 && /etc/init.d/kcpufreq restart &")
-    sys.call("sleep 7")
+    if not fs.access("/etc/init.d/kcpufreq") then
+        sys.call("/bin/chmod +x /etc/init.d/kcpufreq")
+        sys.call("/etc/init.d/kcpufreq enable &")
+        sys.call("sleep 10 && /etc/init.d/kcpufreq restart &")
+        sys.call("sleep 7")
+    end
 end
 
 return mp

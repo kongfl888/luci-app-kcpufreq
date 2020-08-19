@@ -9,14 +9,14 @@ EOF
 
 if [ -e "/etc/config/kcpufreq" ]; then
 	if [ -d "/sys/devices/system/cpu/cpufreq/policy0" ]; then
-        local cmin=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq`
-        local cmax=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq`
+        cmin=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq`
+        cmax=`cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq`
         [ ! -z "$cmin" ] && uci set kcpufreq.@settings[-1].minifreq="$cmin"
         [ ! -z "$cmax" ] && uci set kcpufreq.@settings[-1].maxfreq="$cmax"
 
-		local o_min=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq`
-		local o_max=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq`
-		local o_gov=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor`
+		o_min=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq`
+		o_max=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq`
+		o_gov=`cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor`
 		[ ! -z "$o_gov" ] && uci set kcpufreq.@settings[-1].old_governor="$o_gov"
 		[ ! -z "$o_min" ] && uci set kcpufreq.@settings[-1].old_minifreq="$o_min"
 		[ ! -z "$o_max" ] && uci set kcpufreq.@settings[-1].old_maxifreq="$o_max"
@@ -25,6 +25,7 @@ if [ -e "/etc/config/kcpufreq" ]; then
 	fi
 fi
 
+[ -e "/etc/init.d/kcpufreq" ] && chmod a+x /etc/init.d/kcpufreq >/dev/null 2>&1
 
 rm -f /tmp/luci-indexcache
 exit 0
