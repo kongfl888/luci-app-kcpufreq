@@ -66,8 +66,13 @@ start()
 {
     config_load kcpufreq
     if [ "$enable" != "0" ]; then
-        local cpumin=`cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq`
-        local cpumax=`cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq`
+        if [ ! -d "/sys/devices/system/cpu/cpufreq" -a ! -d "/sys/devices/system/cpu/cpu0/cpufreq" ];then
+            echo "Kernel:cpufreq module does not exist!"
+            logger "Kernel:cpufreq module does not exist!"
+            return 1
+        fi
+        local cpumin=`cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq 2>/dev/null`
+        local cpumax=`cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq 2>/dev/null`
         [ -z "$cpumin" ] && cpumin="408000"
         [ -z "$cpumax" ] && cpumax="1512000"
         local enable=$(uci_get_by_type settings enable 0)

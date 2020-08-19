@@ -112,9 +112,9 @@ local apply =luci.http.formvalue("cbi.apply")
 if apply then
     if fs.access("/etc/init.d/kcpufreq") then
         sys.call("/bin/chmod +x /etc/init.d/kcpufreq")
-        sys.call("/etc/init.d/kcpufreq enable &")
-        sys.call("sleep 10 && /etc/init.d/kcpufreq restart &")
-        sys.call("sleep 7")
+        sys.exec("/etc/init.d/kcpufreq enable &")
+        sys.exec("sleep 10 && /etc/init.d/kcpufreq restart &")
+        sys.call("sleep 5")
     end
 end
 
